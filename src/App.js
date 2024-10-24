@@ -1,23 +1,34 @@
-import logo from './logo.svg';
+import React, { useState } from 'react';
+import DesignUpload from './components/DesignUpload';
+import TShirtPreview from './components/TShirtPreview';
+import DownloadButton from './components/DownloadButton';
 import './App.css';
 
 function App() {
+  const [design, setDesign] = useState(null);
+  const [tshirtColor, setTshirtColor] = useState('#ffffff');
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>Design Your T-shirt</h1>
+
+      {/* Design Upload */}
+      <DesignUpload onImageUpload={setDesign} />
+
+      {/* T-shirt Color Picker */}
+      <label htmlFor="tshirt-color">Choose T-shirt Color:</label>
+      <input
+        type="color"
+        id="tshirt-color"
+        value={tshirtColor}
+        onChange={(e) => setTshirtColor(e.target.value)}
+      />
+
+      {/* T-shirt Preview */}
+      <TShirtPreview design={design} tshirtColor={tshirtColor} />
+
+      {/* Download Preview */}
+      <DownloadButton />
     </div>
   );
 }
